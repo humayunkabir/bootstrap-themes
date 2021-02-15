@@ -19,9 +19,13 @@ export default new Vuex.Store({
     GET_THEMES: (state) => {
       state.loading = true;
       axios
-        .get(`${process.env.VUE_APP_API_URL}/today?limit=7`)
+        .get(`${process.env.VUE_APP_API_URL}/today?limit=15`)
         .then((response) => {
-          state.themes = response.data.data;
+          const processedData = response.data.data.map(theme => {
+            console.log(theme);
+            return theme;
+          })
+          state.themes = processedData;
           state.error = null;
         })
         .catch((error) => {

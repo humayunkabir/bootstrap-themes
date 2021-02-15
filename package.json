@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "deploy:fource": "git push origin `git subtree split --prefix dist main`:gh-pages --force"
   },
   "dependencies": {
     "axios": "^0.21.1",

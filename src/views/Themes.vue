@@ -7,7 +7,7 @@
         :headers="[
           { text: 'Rank', align: 'start text-no-wrap', value: 'index' },
           { text: 'Title', sortable: false, value: 'title' },
-          ...Object.keys(themes[0])
+          ...Object.keys(themes[0].purchases)
             .filter((key) => key.includes('/'))
             .map((key) => ({
               text: key.slice(2).split('/').reverse().join('/'),
@@ -28,7 +28,7 @@
             value: 'released',
           },
         ]"
-        :items="themes.map((t, i) => ({ ...t, index: i + 1 }))"
+        :items="themes.map((t, i) => ({ ...t, ...t.purchases, index: i + 1 }))"
         :items-per-page="10"
         class="elevation-5"
       >

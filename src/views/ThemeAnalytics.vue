@@ -1,5 +1,5 @@
 <template>
-  <v-container class="black cyan--text font-weight-bold rounded">
+  <v-container class="black cyan--text font-weight-bold rounded overflow-auto">
     <pre v-if="themes">{{ JSON.stringify(themes, null, 2) }}</pre>
   </v-container>
 </template>

@@ -15,7 +15,6 @@ export default {
   mutations: {
     SET_THEMES: (state) => {
       state.loading = true;
-      console.log(state);
       axios
         .get(`${process.env.VUE_APP_API_URL}/today?limit=${state.dayLimit}`)
         .then((response) => {

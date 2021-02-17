@@ -4,12 +4,12 @@
       <v-list shaped dark>
         <v-subheader class="font-weight-bold">Bootstrap Themes</v-subheader>
         <v-list-item-group color="white">
-          <v-list-item v-for="(item, i) in items" :key="i" :to="item.path">
+          <v-list-item v-for="(nav, i) in navs" :key="i" :to="nav.path">
             <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
+              <v-icon v-text="nav.icon"></v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
+              <v-list-item-title v-text="nav.text"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -29,7 +29,7 @@
 export default {
   data: () => ({
     drawer: null,
-    items: [
+    navs: [
       { text: "Themes", icon: "mdi-clock", path: "/" },
       { text: "Analytics", icon: "mdi-chart-line", path: "/analytics" },
     ],

@@ -9,20 +9,10 @@
 import { mapGetters } from "vuex";
 import ECharts from "vue-echarts";
 
-import "echarts/lib/chart/bar";
 import "echarts/lib/chart/line";
-import "echarts/lib/chart/pie";
-import "echarts/lib/chart/map";
-import "echarts/lib/chart/radar";
-import "echarts/lib/chart/scatter";
-import "echarts/lib/chart/effectScatter";
 import "echarts/lib/component/tooltip";
-import "echarts/lib/component/polar";
-import "echarts/lib/component/geo";
 import "echarts/lib/component/legend";
-import "echarts/lib/component/title";
-import "echarts/lib/component/visualMap";
-import "echarts/lib/component/dataset";
+// import "echarts/lib/component/title";
 
 export default {
   components: {
@@ -35,9 +25,9 @@ export default {
         renderer: "canvas",
       },
       options: {
-        title: {
-          text: "Themes",
-        },
+        // title: {
+        //   text: "Bootstrap Themes Analysis",
+        // },
         tooltip: {
           trigger: "axis",
         },
@@ -67,19 +57,27 @@ export default {
       },
     };
   },
+  methods: {
+    titleFormater(title) {
+      return `${title.split(" ")[0].split('–')[0].trim()} ${title
+        .toLowerCase()
+        .includes("react") ? '- React' : ''}`.trim();
+    },
+  },
   created() {
     const limit = 15;
-    const legendData =  this.themes.slice(0, limit).map(({ title }) => title.split(' ')[0].trim());
-    console.log(legendData);
+    const legendData = this.themes
+      .slice(0, limit)
+      .map(({ title }) => this.titleFormater(title));
     this.options.legend.data = legendData;
     this.options.xAxis.data = Object.keys(this.themes[0].purchases);
     this.options.series = this.themes
       .slice(0, limit)
       .map(({ title, purchases }) => ({
-        name: title.split(' ')[0].trim(),
+        name: this.titleFormater(title),
         type: "line",
-        stack: "Hello",
         data: Object.values(purchases),
+        smooth: true,
       }));
   },
 };
@@ -88,6 +86,6 @@ export default {
 <style scoped>
 .echarts {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 </style>

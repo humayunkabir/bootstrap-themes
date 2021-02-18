@@ -1,7 +1,6 @@
 <template>
   <v-container class="fill-height">
     <v-chart :options="options" :init-options="initOptions" autoresize />
-    <!-- <pre v-if="themes">{{ JSON.stringify(themes, null, 2) }}</pre> -->
   </v-container>
 </template>
 
@@ -86,6 +85,6 @@ export default {
 <style scoped>
 .echarts {
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
 }
 </style>

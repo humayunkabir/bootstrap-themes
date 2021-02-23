@@ -76,7 +76,7 @@ export default {
         name: this.titleFormater(title),
         type: "line",
         data: Object.values(purchases),
-        smooth: true,
+        smooth: false,
       }));
   },
 };

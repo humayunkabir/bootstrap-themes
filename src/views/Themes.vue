@@ -18,7 +18,6 @@
           {
             text: 'Category',
             align: 'center text-no-wrap',
-            sortable: false,
             value: 'category',
           },
           {

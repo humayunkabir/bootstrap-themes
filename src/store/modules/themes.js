@@ -18,6 +18,7 @@ export default {
       axios
         .get(`${process.env.VUE_APP_API_URL}/today?limit=${state.dayLimit}`)
         .then((response) => {
+          console.log(response);
           const processedData = response.data.data.map((theme) => {
             const purchasesCounts = {};
             const keys = Object.keys(theme.purchases).filter(

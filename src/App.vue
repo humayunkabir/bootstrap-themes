@@ -1,10 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      color="purple darken-4"
-      app
-    >
+    <v-navigation-drawer v-model="drawer" color="purple darken-4" app>
       <v-list shaped dark>
         <v-row align="center" no-gutters class="mb-2">
           <v-col cols="auto">
@@ -33,18 +29,24 @@
     </v-navigation-drawer>
     <v-app-bar app color="purple darken-4" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <v-row align="center" no-gutters v-if="!drawer">
-        <v-col cols="auto">
-          <v-img
-            src="https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack.png"
-            width="40"
-            class="mr-2"
-          />
-        </v-col>
+      <v-row align="center" no-gutters>
+        <template v-if="!drawer">
+          <v-col cols="auto">
+            <v-img
+              src="https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack.png"
+              width="40"
+              class="mr-2"
+            />
+          </v-col>
+          <v-col>
+            <v-toolbar-title class="font-weight-bold">
+              Bootstrap Themes
+            </v-toolbar-title>
+          </v-col>
+        </template>
+        <v-spacer/>
         <v-col>
-          <v-toolbar-title class="font-weight-bold">
-            Bootstrap Themes
-          </v-toolbar-title>
+          <search />
         </v-col>
       </v-row>
     </v-app-bar>
@@ -55,7 +57,10 @@
 </template>
 
 <script>
+import Search from "@/components/Search";
+
 export default {
+  components: { Search },
   data: () => ({
     drawer: null,
     mini: true,

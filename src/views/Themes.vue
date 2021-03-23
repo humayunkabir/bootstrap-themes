@@ -12,7 +12,6 @@
             .map((key) => ({
               text: key.slice(2).split('/').reverse().join('/'),
               align: 'center text-no-wrap',
-              sortable: false,
               value: key,
             })),
           {

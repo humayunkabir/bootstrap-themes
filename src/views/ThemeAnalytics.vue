@@ -1,6 +1,12 @@
 <template>
   <v-container class="fill-height">
-    <v-chart :options="options" :init-options="initOptions" autoresize />
+    <v-progress-linear v-if="loading" indeterminate />
+    <v-chart
+      v-if="themes"
+      :options="options"
+      :init-options="initOptions"
+      autoresize
+    />
   </v-container>
 </template>
 
@@ -56,28 +62,36 @@ export default {
       },
     };
   },
+  watch: {
+    themes() {
+      this.init();
+    },
+  },
   methods: {
     titleFormater(title) {
-      return `${title.split(" ")[0].split('–')[0].trim()} ${title
-        .toLowerCase()
-        .includes("react") ? '- React' : ''}`.trim();
+      return `${title.split(" ")[0].split("–")[0].trim()} ${
+        title.toLowerCase().includes("react") ? "- React" : ""
+      }`.trim();
+    },
+    init() {
+      const limit = 15;
+      const legendData = this.themes
+        .slice(0, limit)
+        .map(({ title }) => this.titleFormater(title));
+      this.options.legend.data = legendData;
+      this.options.xAxis.data = Object.keys(this.themes[0].purchases);
+      this.options.series = this.themes
+        .slice(0, limit)
+        .map(({ title, purchases }) => ({
+          name: this.titleFormater(title),
+          type: "line",
+          data: Object.values(purchases),
+          smooth: false,
+        }));
     },
   },
   created() {
-    const limit = 15;
-    const legendData = this.themes
-      .slice(0, limit)
-      .map(({ title }) => this.titleFormater(title));
-    this.options.legend.data = legendData;
-    this.options.xAxis.data = Object.keys(this.themes[0].purchases);
-    this.options.series = this.themes
-      .slice(0, limit)
-      .map(({ title, purchases }) => ({
-        name: this.titleFormater(title),
-        type: "line",
-        data: Object.values(purchases),
-        smooth: false,
-      }));
+    this.init();
   },
 };
 </script>

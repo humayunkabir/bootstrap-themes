@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   state: {
@@ -13,16 +13,15 @@ export default {
     error: ({ error }) => error,
   },
   mutations: {
-    SET_THEMES: (state) => {
+    setThemes: (state) => {
       state.loading = true;
       axios
         .get(`${process.env.VUE_APP_API_URL}/today?limit=${state.dayLimit}`)
         .then((response) => {
-          console.log(response);
           const processedData = response.data.data.map((theme) => {
             const purchasesCounts = {};
             const keys = Object.keys(theme.purchases).filter(
-              (key) => theme.purchases[key] !== '-'
+              (key) => theme.purchases[key] !== "-"
             );
             keys.forEach((key, index) => {
               if (index < keys.length - 1) {
@@ -47,8 +46,8 @@ export default {
   },
   actions: {
     getThemes: ({ commit, state }, payload) => {
-      state.dayLimit = payload?.limit || 15;
-      commit('SET_THEMES');
+      state.dayLimit = payload?.limit || 7;
+      commit("setThemes");
     },
   },
 };

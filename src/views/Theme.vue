@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="theme">
     <v-row justify="center">
-      <v-col cols="7">
+      <v-col md="9" xl="7">
         <v-card>
           <v-img :src="theme.thumb" />
           <v-card-title>

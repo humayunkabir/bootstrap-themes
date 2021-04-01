@@ -7,6 +7,7 @@
         :headers="[
           { text: 'Rank', align: 'start text-no-wrap', value: 'index' },
           { text: 'Title', sortable: false, value: 'title' },
+          { text: `Last ${dayLimit} days`, align: 'center text-no-wrap', value: 'total' },
           ...Object.keys(themes[0].purchases)
             .filter((key) => key.includes('/'))
             .map((key) => ({
@@ -53,6 +54,6 @@
 import { mapGetters } from "vuex";
 
 export default {
-  computed: mapGetters(["loading", "themes"]),
+  computed: mapGetters(["loading", "themes", "dayLimit"]),
 };
 </script>

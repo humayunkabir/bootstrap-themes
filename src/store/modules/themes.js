@@ -10,6 +10,7 @@ export default {
   getters: {
     loading: ({ loading }) => loading,
     themes: ({ themes }) => themes,
+    dayLimit: ({ dayLimit }) => dayLimit,
     error: ({ error }) => error,
   },
   mutations: {
@@ -23,13 +24,17 @@ export default {
             const keys = Object.keys(theme.purchases).filter(
               (key) => theme.purchases[key] !== "-"
             );
+            let total = 0;
             keys.forEach((key, index) => {
               if (index < keys.length - 1) {
-                purchasesCounts[key] =
+                const purchases =
                   theme.purchases[key] - theme.purchases[keys[index + 1]];
+                purchasesCounts[key] = purchases;
+                total += purchases;
               }
             });
             theme.purchases = purchasesCounts;
+            theme.total = total;
             return theme;
           });
           state.themes = processedData;
